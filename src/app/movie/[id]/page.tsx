@@ -42,7 +42,7 @@ export default async function MovieDetailPage(props: {
             alt={movie.title}
             fill
             priority
-            className="object-cover rounded-lg"
+            className="object-contain"
           />
         </div>
 
@@ -53,7 +53,8 @@ export default async function MovieDetailPage(props: {
             <a
               href={`https://www.youtube.com/watch?v=${trailer.key}`}
               target="_blank"
-              className="inline-block mb-6 bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2 rounded-full text-center"
+              className="self-start mb-6 bg-red-600 hover:bg-red-700 text-white font-semibold 
+                        px-5 py-2 rounded-full text-center"
             >
               ▶ Watch Trailer
             </a>

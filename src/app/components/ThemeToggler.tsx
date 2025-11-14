@@ -2,6 +2,7 @@
 
 import { useTheme } from "../context/themecontext/ThemeProvider";
 import { useState, useEffect } from "react";
+import { Sun, Moon } from "lucide-react";
 
 export default function ThemeToggler() {
   const { theme, toggle } = useTheme();
@@ -17,9 +18,15 @@ export default function ThemeToggler() {
   return (
     <button
       onClick={toggle}
-      className="fixed bottom-6 right-6 z-50 px-4 py-2 rounded-full bg-foreground text-background"
+      className="fixed bottom-6 right-6 z-50 p-3 rounded-full 
+                 bg-foreground text-background shadow-lg 
+                 hover:opacity-80 transition"
     >
-      {theme === "light" ? "Dark" : "Light"}
+      {theme === "light" ? (
+        <Moon className="w-5 h-5" />
+      ) : (
+        <Sun className="w-5 h-5" />
+      )}
     </button>
   );
 }
