@@ -50,15 +50,15 @@ export default function MovieRow({
 
   return (
     <section className="mt-10 px-6">
-      <h3 className="text-xl font-semibold mb-3">{categoryTitle}</h3>
+      <h3 className="text-xl font-semibold mb-3 text-foreground">{categoryTitle}</h3>
 
       <div className="relative group w-full">
         {!atStart && (
           <button
             onClick={scrollLeft}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/60 p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-background/60 p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-6 h-6 text-foreground" />
           </button>
         )}
 
@@ -75,9 +75,9 @@ export default function MovieRow({
         {!atEnd && (
           <button
             onClick={scrollRight}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/60 p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-background/60 p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-6 h-6 text-foreground" />
           </button>
         )}
       </div>

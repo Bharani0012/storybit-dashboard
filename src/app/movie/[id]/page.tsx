@@ -23,11 +23,11 @@ export default async function MovieDetailPage(props: {
   );
 
   return (
-    <main className="min-h-screen bg-black text-white px-6 pt-24 pb-16">
+    <main className="min-h-screen bg-background text-foreground px-6 pt-24 pb-16">
 
       <Link
         href="/"
-        className="inline-block mb-8 text-sm bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full transition"
+        className="inline-block mb-8 text-sm bg-foreground/10 hover:bg-foreground/20 px-4 py-2 rounded-full transition"
       >
         ← Back
       </Link>
@@ -47,7 +47,7 @@ export default async function MovieDetailPage(props: {
         </div>
 
         <div className="flex flex-col justify-center">
-          <h1 className="text-4xl font-bold mb-4">{movie.title}</h1>
+          <h1 className="text-4xl font-bold mb-4 text-foreground">{movie.title}</h1>
 
           {trailer && (
             <a
@@ -59,29 +59,29 @@ export default async function MovieDetailPage(props: {
             </a>
           )}
 
-          <p className="text-gray-300 mb-6 leading-relaxed">
+          <p className="text-foreground/70 mb-6 leading-relaxed">
             {movie.overview}
           </p>
 
-          <div className="space-y-2 text-sm text-gray-400">
+          <div className="space-y-2 text-sm text-foreground/60">
             {movie.release_date && (
               <p>
-                <span className="font-semibold text-white">Release Date:</span>{" "}
+                <span className="font-semibold text-foreground">Release Date:</span>{" "}
                 {movie.release_date}
               </p>
             )}
 
             {movie.vote_average && (
               <p>
-                <span className="font-semibold text-white">Rating:</span>{" "}
+                <span className="font-semibold text-foreground">Rating:</span>{" "}
                 {movie.vote_average.toFixed(1)}
               </p>
             )}
 
             {movie.genres && (
               <p>
-                <span className="font-semibold text-white">Genres:</span>{" "}
-                {movie.genres.map((g: { id: number; name: string }) => g.name).join(", ")}
+                <span className="font-semibold text-foreground">Genres:</span>{" "}
+                {movie.genres.map((g: { name: string }) => g.name).join(", ")}
               </p>
             )}
           </div>

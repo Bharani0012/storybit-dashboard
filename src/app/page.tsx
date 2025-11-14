@@ -14,7 +14,7 @@ export default async function Home() {
   const heroMovie = popular.results[0];
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-background text-foreground">
       <Header />
       <HeroBanner movie={heroMovie} />
 
