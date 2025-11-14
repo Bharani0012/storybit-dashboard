@@ -7,27 +7,49 @@ if (!API_KEY) {
   throw new Error("Missing TMDB_API_KEY in environment variables");
 }
 
-async function safeFetch<T>(url: string): Promise<T | null> {
-  try {
-    const res = await fetch(url, { next: { revalidate: 3600 } });
-    if (!res.ok) return null;
-    return res.json();
-  } catch {
-    return null;
-  }
+export async function fetchPopular(): Promise<MovieResponse> {
+  const res = await fetch(`${BASE}/movie/popular?api_key=${API_KEY}`, {
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch popular movies");
+
+  return res.json();
 }
 
-export const fetchPopular = () =>
-  safeFetch<MovieResponse>(`${BASE}/movie/popular?api_key=${API_KEY}`);
+export async function fetchTopRated(): Promise<MovieResponse> {
+  const res = await fetch(`${BASE}/movie/top_rated?api_key=${API_KEY}`, {
+    next: { revalidate: 3600 },
+  });
 
-export const fetchTopRated = () =>
-  safeFetch<MovieResponse>(`${BASE}/movie/top_rated?api_key=${API_KEY}`);
+  if (!res.ok) throw new Error("Failed to fetch top rated movies");
 
-export const fetchUpcoming = () =>
-  safeFetch<MovieResponse>(`${BASE}/movie/upcoming?api_key=${API_KEY}`);
+  return res.json();
+}
 
-export const fetchMovieById = (id: string) =>
-  safeFetch(`${BASE}/movie/${id}?api_key=${API_KEY}`);
+export async function fetchUpcoming(): Promise<MovieResponse> {
+  const res = await fetch(`${BASE}/movie/upcoming?api_key=${API_KEY}`, {
+    next: { revalidate: 3600 },
+  });
 
-export const fetchMovieVideos = (id: string) =>
-  safeFetch(`${BASE}/movie/${id}/videos?api_key=${API_KEY}`);
+  if (!res.ok) throw new Error("Failed to fetch upcoming movies");
+
+  return res.json();
+}
+
+export async function fetchMovieById(id: string) {
+  const res = await fetch(`${BASE}/movie/${id}?api_key=${API_KEY}`, {
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) throw new Error(`Failed to fetch movie ${id}`);
+
+  return res.json();
+}
+
+export async function fetchMovieVideos(id: string) {
+  const res = await fetch(`${BASE}/movie/${id}/videos?api_key=${API_KEY}`);
+  if (!res.ok) throw new Error("Failed to fetch videos");
+  return res.json();
+}
+

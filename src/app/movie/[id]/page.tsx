@@ -10,8 +10,16 @@ export default async function MovieDetailPage(props: {
   const movie = await fetchMovieById(id);
   const videos = await fetchMovieVideos(id);
 
+  type Video = {
+    id?: string;
+    key?: string;
+    name?: string;
+    site?: string;
+    type?: string;
+  };
+
   const trailer = videos.results?.find(
-    (v: any) => v.type === "Trailer" && v.site === "YouTube"
+    (v: Video) => v.type === "Trailer" && v.site === "YouTube"
   );
 
   return (
@@ -73,7 +81,7 @@ export default async function MovieDetailPage(props: {
             {movie.genres && (
               <p>
                 <span className="font-semibold text-white">Genres:</span>{" "}
-                {movie.genres.map((g: any) => g.name).join(", ")}
+                {movie.genres.map((g: { id: number; name: string }) => g.name).join(", ")}
               </p>
             )}
           </div>

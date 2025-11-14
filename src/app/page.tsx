@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import HeroBanner from "./components/HeroBanner";
 import MovieRow from "./components/MovieRow";
+
 import { fetchPopular, fetchTopRated, fetchUpcoming } from "@/lib/tmdb";
 
 export default async function Home() {
@@ -10,32 +11,16 @@ export default async function Home() {
     fetchUpcoming(),
   ]);
 
-  const safe = <T,>(data: { results?: T[] } | null | undefined): T[] =>
-    data?.results ?? [];
-
-  const popularMovies = safe(popular);
-  const topRatedMovies = safe(topRated);
-  const upcomingMovies = safe(upcoming);
-
-  const heroMovie = popularMovies[0] ?? null;
+  const heroMovie = popular.results[0];
 
   return (
     <main className="min-h-screen bg-black text-white">
       <Header />
+      <HeroBanner movie={heroMovie} />
 
-      {heroMovie && <HeroBanner movie={heroMovie} />}
-
-      {popularMovies.length > 0 && (
-        <MovieRow movies={popularMovies} categoryTitle="Popular" />
-      )}
-
-      {topRatedMovies.length > 0 && (
-        <MovieRow movies={topRatedMovies} categoryTitle="Top Rated" />
-      )}
-
-      {upcomingMovies.length > 0 && (
-        <MovieRow movies={upcomingMovies} categoryTitle="Upcoming" />
-      )}
+      <MovieRow movies={popular.results} categoryTitle="Popular" />
+      <MovieRow movies={topRated.results} categoryTitle="Top Rated" />
+      <MovieRow movies={upcoming.results} categoryTitle="Upcoming" />
     </main>
   );
 }
